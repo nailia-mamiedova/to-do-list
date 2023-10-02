@@ -2,15 +2,28 @@
 
 
 {% block content %}
-  <h1>TODO list</h1>
+  <h1>TODO list
   <a href="{% url 'to_do:task-create' %}" class="btn btn-primary link-to-page">
     Create task
   </a>
-  {% for task in tasks_list %}
-    <strong>{{ task.content }}</strong> <p>{{ task.is_done }}</p> at <p></p>
-    <p>Created: {{ task.datetime }}</p>
-    <p>Tags: {{ task.tags.name }}</p>
+  </h1>
 
+  <br>
+
+  {% for task in tasks_list %}
+    <p><strong>{{ task.content }}</strong>
+      {% if task.is_done %} <strong style="color: green"> Done</strong>
+      {% else %} <strong style="color: red"> Note done yet</strong>
+      {% endif %}
+      <a href="{% url 'to_do:update-task' task.id %}" class="link-to-page btn btn-primary">Update</a>
+      <a href="{% url 'to_do:delete-task' task.id %}" class="link-to-page btn btn-danger">Delete</a>
+    </p>
+    <p>Created: {{ task.datetime }}</p>
+    {% if task.deadline %}
+      <p>Deadline: {{ task.deadline }}</p>
+    {% endif %}
+    <p>Tags: {{ task.tags.name }}</p>
+    <hr>
   {% empty %}
     <p>No tasks in the list</p>
   {% endfor %}
