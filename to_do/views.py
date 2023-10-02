@@ -7,7 +7,7 @@ from .models import Task, Tag
 
 
 def home_page(request):
-    tasks_list = Task.objects.all().prefetch_related("tags")
+    tasks_list = Task.objects.all().prefetch_related("tags").order_by('is_done', '-datetime')
     return render(request, "to_do/home_page.html", {"tasks_list": tasks_list})
 
 
