@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+  <h1>TODO list</h1>
+  <a href="{% url 'to_do:task-create' %}" class="btn btn-primary link-to-page">
+    Create task
+  </a>
+  {% for task in tasks_list %}
+    <strong>{{ task.content }}</strong> <p>{{ task.is_done }}</p> at <p></p>
+    <p>Created: {{ task.datetime }}</p>
+    <p>Tags: {{ task.tags.name }}</p>
+
+  {% empty %}
+    <p>No tasks in the list</p>
+  {% endfor %}
+{% endblock %}
