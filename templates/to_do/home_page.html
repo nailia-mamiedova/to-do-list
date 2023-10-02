@@ -22,7 +22,7 @@
     {% if task.deadline %}
       <p>Deadline: {{ task.deadline }}</p>
     {% endif %}
-    <p>Tags: {{ task.tags.name }}</p>
+    <p>Tags: {% for tag in task.tags.all %} {{ tag.name }} {% endfor %}</p>
     <hr>
   {% empty %}
     <p>No tasks in the list</p>
