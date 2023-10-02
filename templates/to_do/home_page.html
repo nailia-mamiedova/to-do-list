@@ -19,6 +19,11 @@
       <a href="{% url 'to_do:delete-task' task.id %}" class="link-to-page btn btn-danger">Delete</a>
     </p>
     <p>Created: {{ task.datetime }}</p>
+    {% if task.is_done %}
+        <a href="" class="link-to-page btn btn-secondary">Undo</a>
+      {% else %}
+        <a href="" class="link-to-page btn btn-success">Complete</a>
+      {% endif %}
     {% if task.deadline %}
       <p>Deadline: {{ task.deadline }}</p>
     {% endif %}
