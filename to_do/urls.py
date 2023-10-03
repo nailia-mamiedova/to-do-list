@@ -8,7 +8,7 @@ from .views import (
     TagCreateView,
     TagUpdateView,
     TagDeleteView,
-    complete_undo_task,
+    CompleteUndoTask,
 )
 
 
@@ -21,7 +21,7 @@ urlpatterns = [
     path("tags/create/", TagCreateView.as_view(), name="tag-create"),
     path("tags/update/<int:pk>/", TagUpdateView.as_view(), name="update-tag"),
     path("tags/delete/<int:pk>/", TagDeleteView.as_view(), name="delete-tag"),
-    path("complete-undo/<int:pk>/", complete_undo_task, name="complete-undo-task"),
+    path("complete-undo/<int:pk>/", CompleteUndoTask.as_view(), name="complete-undo-task"),
 ]
 
 

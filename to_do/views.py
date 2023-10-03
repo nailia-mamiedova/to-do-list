@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
 
 from .models import Task, Tag
 
@@ -49,10 +49,11 @@ class TagDeleteView(generic.DeleteView):
     success_url = reverse_lazy("to_do:tag-list")
 
 
-def complete_undo_task(request, pk):
-    task = Task.objects.get(id=pk)
-    task.is_done = not task.is_done
-    task.save()
-    return HttpResponseRedirect(
-        reverse_lazy("to_do:home-page")
-    )
+class CompleteUndoTask(View):
+    def get(self, request, pk):
+        task = Task.objects.get(id=pk)
+        task.is_done = not task.is_done
+        task.save()
+        return HttpResponseRedirect(
+            reverse_lazy("to_do:home-page")
+        )
